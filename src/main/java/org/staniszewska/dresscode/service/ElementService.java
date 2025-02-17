@@ -13,6 +13,10 @@ import org.staniszewska.dresscode.repository.ColorRepository;
 import org.staniszewska.dresscode.repository.ElementRepository;
 import org.staniszewska.dresscode.repository.SeasonRepository;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ElementService {
@@ -33,4 +37,20 @@ public class ElementService {
         logger.info("Element added!");
     }
 
+    public List<ElementDTO> findAll(){
+        List<ElementEntity> elements = new ArrayList<>((Collection<? extends ElementEntity>) elementRepository.findAll());
+        return elements.stream()
+                .map(elementMapper::toDTO)
+                .toList();
+    }
+
+    public ElementDTO findById(Long id) {
+        var result = elementRepository.findElementEntityById(id);
+        if(result == null){
+            return null;
+        }else{
+            return elementMapper.toDTO(result);
+        }
+
+    }
 }

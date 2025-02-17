@@ -17,4 +17,16 @@ public class ElementDTO {
     private List<Season> seasons;
     private String photo;
     private ElementCategory category;
+
+    @Override
+    public String toString() {
+        return "ElementDTO{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", colorList=" + colorList +
+                ", seasons=" + seasons +
+                ", category=" + category +
+                '}';
+    }
+
 }
