@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.staniszewska.dresscode.entity.ColorEntity;
 import org.staniszewska.dresscode.entity.ElementEntity;
 import org.staniszewska.dresscode.mapper.ElementMapper;
 import org.staniszewska.dresscode.model.ElementDTO;
@@ -50,6 +49,16 @@ public class ElementService {
             return null;
         }else{
             return elementMapper.toDTO(result);
+        }
+    }
+
+    public void deleteElement(Long id) {
+        ElementEntity e = elementRepository.findElementEntityById(id);
+        if(e == null){
+            logger.info("Element with id {} not found", id);
+        }else{
+            elementRepository.delete(e);
+            logger.info("Element successfully deleted!");
         }
 
     }

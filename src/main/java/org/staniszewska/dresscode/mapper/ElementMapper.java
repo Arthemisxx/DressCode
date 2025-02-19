@@ -13,6 +13,7 @@ import org.staniszewska.dresscode.model.Season;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -36,24 +37,23 @@ public class ElementMapper {
     }
 
     public ElementEntity toEntity(ElementDTO elementDTO){
-        List<ColorEntity> colorList = elementDTO.getColorList()
+        Set<ColorEntity> colorList = elementDTO.getColorList()
                 .stream()
                 .map((x) -> {
                     var e = new ColorEntity();
                     e.setColor(x);
                     return e;
                 })
-                .toList();
+                .collect(Collectors.toSet());
 
-        List<SeasonEntity> seasons = elementDTO.getSeasons()
+        Set<SeasonEntity> seasons = elementDTO.getSeasons()
                 .stream()
                 .map((x) -> {
                     var s = new SeasonEntity();
                     s.setSeason(x);
                     return s;
                 })
-                .toList();
-
+                .collect(Collectors.toSet());
         ElementCategoryEntity category = new ElementCategoryEntity();
         category.setElementCategory(elementDTO.getCategory());
 

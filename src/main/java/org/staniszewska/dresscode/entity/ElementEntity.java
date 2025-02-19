@@ -3,7 +3,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -19,17 +20,28 @@ public class ElementEntity {
     private String photo;
 
     @ManyToMany
-    private List<ColorEntity> colorList;
+    @JoinTable(
+            name = "element_color",
+            joinColumns = @JoinColumn(name = "element_id"),
+            inverseJoinColumns = @JoinColumn(name = "color_id")
+    )
+    private Set<ColorEntity> colorList = new HashSet<>();
 
     @ManyToMany
-    private List<SeasonEntity> seasons;
+    @JoinTable(
+            name = "element_season",
+            joinColumns = @JoinColumn(name = "element_id"),
+            inverseJoinColumns = @JoinColumn(name = "season_id")
+    )
+    private Set<SeasonEntity> seasons = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "category_id", referencedColumnName = "elementCategory")
     private ElementCategoryEntity category;
 
     public ElementEntity() {}
 
-    public ElementEntity(String name, String description, String photo, List<ColorEntity> colorList, List<SeasonEntity> seasons, ElementCategoryEntity category) {
+    public ElementEntity(String name, String description, String photo, Set<ColorEntity> colorList, Set<SeasonEntity> seasons, ElementCategoryEntity category) {
         this.name = name;
         this.description = description;
         this.photo = photo;
@@ -37,8 +49,6 @@ public class ElementEntity {
         this.seasons = seasons;
         this.category = category;
     }
-
-
 
     //TODO Add sets
 
