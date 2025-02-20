@@ -62,4 +62,15 @@ public class ElementService {
         }
 
     }
+
+    public void updateElement(Long id, ElementDTO elementDTO) {
+        ElementEntity updatedElement = elementMapper.toEntity(elementDTO);
+        updatedElement.setId(id);
+        colorRepository.saveAll(updatedElement.getColorList());
+        categoryRepository.save(updatedElement.getCategory());
+        seasonRepository.saveAll(updatedElement.getSeasons());
+        elementRepository.save(updatedElement);
+        logger.info("Element updated successfully!");
+
+    }
 }

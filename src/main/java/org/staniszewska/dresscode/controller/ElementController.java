@@ -56,4 +56,12 @@ public class ElementController {
         elementService.deleteElement(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    @PutMapping(path = "/{id}/update", produces = "application/json")
+    public ResponseEntity<Void> updateElement(@PathVariable Long id, @RequestBody ElementDTO elementDTO){
+        logger.info("Updating element with id {}", id);
+        elementService.updateElement(id, elementDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
