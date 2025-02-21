@@ -10,8 +10,6 @@ import org.staniszewska.dresscode.model.ElementCategory;
 import org.staniszewska.dresscode.model.ElementDTO;
 import org.staniszewska.dresscode.model.Season;
 
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,25 +17,26 @@ import java.util.stream.Collectors;
 @Component
 @NoArgsConstructor
 public class ElementMapper {
-    public ElementDTO toDTO(ElementEntity elementEntity){
+    public ElementDTO toDTO(ElementEntity elementEntity) {
+        Long id = elementEntity.getId();
         String name = elementEntity.getName();
         String description = elementEntity.getDescription();
-        List<String> colorList = elementEntity.getColorList()
+        Set<String> colorSet = elementEntity.getColorSet()
                 .stream()
                 .map(ColorEntity::getColor)
-                .toList();
-        List<Season> seasons = elementEntity.getSeasons()
+                .collect(Collectors.toSet());
+        Set<Season> seasons = elementEntity.getSeasons()
                 .stream()
                 .map(SeasonEntity::getSeason)
-                .toList();
-        String photo =  elementEntity.getPhoto();
+                .collect(Collectors.toSet());
+        String photo = elementEntity.getPhoto();
         ElementCategory category = elementEntity.getCategory().getElementCategory();
 
-        return new ElementDTO(name, description, colorList, seasons, photo, category);
+        return new ElementDTO(id, name, description, colorSet, seasons, photo, category);
     }
 
-    public ElementEntity toEntity(ElementDTO elementDTO){
-        Set<ColorEntity> colorList = elementDTO.getColorList()
+    public ElementEntity toEntity(ElementDTO elementDTO) {
+        Set<ColorEntity> colorSet = elementDTO.getColorList()
                 .stream()
                 .map((x) -> {
                     var e = new ColorEntity();
@@ -57,6 +56,6 @@ public class ElementMapper {
         ElementCategoryEntity category = new ElementCategoryEntity();
         category.setElementCategory(elementDTO.getCategory());
 
-        return new ElementEntity(elementDTO.getName(), elementDTO.getDescription(), elementDTO.getPhoto(), colorList, seasons, category);
+        return new ElementEntity(elementDTO.getId(), elementDTO.getName(), elementDTO.getDescription(), elementDTO.getPhoto(), colorSet, seasons, category);
     }
 }

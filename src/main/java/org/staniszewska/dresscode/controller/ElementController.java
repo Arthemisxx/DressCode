@@ -60,7 +60,7 @@ public class ElementController {
 
     @PutMapping(path = "/{id}/update", produces = "application/json")
     public ResponseEntity<Void> updateElement(@PathVariable Long id, @RequestBody ElementDTO elementDTO){
-        logger.info("Updating element with id {}", id);
+        logger.info("Updating element with id {}...", id);
         elementService.updateElement(id, elementDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

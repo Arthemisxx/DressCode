@@ -18,5 +18,9 @@ public class SeasonEntity {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "seasons")
-    private Set<ElementEntity> elementEntityList;
+    private Set<ElementEntity> elements;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "seasons")
+    private Set<SetEntity> sets;
 }

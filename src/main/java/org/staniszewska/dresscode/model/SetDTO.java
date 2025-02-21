@@ -1,6 +1,5 @@
 package org.staniszewska.dresscode.model;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,25 +11,24 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ElementDTO {
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class SetDTO {
     private String name;
     private String description;
-    private Set<String> colorList;
-    private Set<Season> seasons;
     private String photo;
-    private ElementCategory category;
+    private Creator creator;
+    private SetCategory category;
+    private Set<Season> seasons;
+    private Set<ElementDTO> elements;
 
     @Override
     public String toString() {
-        return "ElementDTO{" +
+        return "SetDTO{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", colorList=" + colorList +
                 ", seasons=" + seasons +
                 ", category=" + category +
+                ", creator=" + creator +
+                ", elements=" + elements +
                 '}';
     }
-
 }

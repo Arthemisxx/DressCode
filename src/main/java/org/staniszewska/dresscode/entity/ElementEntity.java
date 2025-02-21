@@ -1,4 +1,5 @@
 package org.staniszewska.dresscode.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +26,7 @@ public class ElementEntity {
             joinColumns = @JoinColumn(name = "element_id"),
             inverseJoinColumns = @JoinColumn(name = "color_id")
     )
-    private Set<ColorEntity> colorList = new HashSet<>();
+    private Set<ColorEntity> colorSet = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -41,14 +42,19 @@ public class ElementEntity {
 
     public ElementEntity() {}
 
-    public ElementEntity(String name, String description, String photo, Set<ColorEntity> colorList, Set<SeasonEntity> seasons, ElementCategoryEntity category) {
+    public ElementEntity(Long id ,String name, String description, String photo, Set<ColorEntity> colorSet, Set<SeasonEntity> seasons, ElementCategoryEntity category) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.photo = photo;
-        this.colorList = colorList;
+        this.colorSet = colorSet;
         this.seasons = seasons;
         this.category = category;
     }
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "elements")
+    private Set<SetEntity> sets;
 
     //TODO Add sets
 

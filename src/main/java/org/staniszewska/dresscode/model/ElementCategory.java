@@ -8,5 +8,11 @@ public enum ElementCategory {
     NIGHTWEAR,
     SWIMWEAR,
     FOOTWEAR,
-    ACCESSORIES
+    BAG,
+    OTHER,
+    EARS,
+    NECK,
+    HEAD,
+    GLASSES,
+
 }

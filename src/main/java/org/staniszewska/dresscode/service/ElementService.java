@@ -29,7 +29,15 @@ public class ElementService {
 
     public void addElement(ElementDTO elementDTO){
         ElementEntity elementEntity = elementMapper.toEntity(elementDTO);
-        colorRepository.saveAll(elementEntity.getColorList());
+        colorRepository.saveAll(elementEntity.getColorSet());
+        categoryRepository.save(elementEntity.getCategory());
+        seasonRepository.saveAll(elementEntity.getSeasons());
+        elementRepository.save(elementEntity);
+        logger.info("Element added!");
+    }
+
+    public void addElement(ElementEntity elementEntity){
+        colorRepository.saveAll(elementEntity.getColorSet());
         categoryRepository.save(elementEntity.getCategory());
         seasonRepository.saveAll(elementEntity.getSeasons());
         elementRepository.save(elementEntity);
@@ -66,7 +74,7 @@ public class ElementService {
     public void updateElement(Long id, ElementDTO elementDTO) {
         ElementEntity updatedElement = elementMapper.toEntity(elementDTO);
         updatedElement.setId(id);
-        colorRepository.saveAll(updatedElement.getColorList());
+        colorRepository.saveAll(updatedElement.getColorSet());
         categoryRepository.save(updatedElement.getCategory());
         seasonRepository.saveAll(updatedElement.getSeasons());
         elementRepository.save(updatedElement);

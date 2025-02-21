@@ -19,5 +19,5 @@ public class ElementCategoryEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "category")
-    private Set<ElementEntity> elementEntityList = new HashSet<>();
+    private Set<ElementEntity> elements = new HashSet<>();
 }

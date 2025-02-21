@@ -13,6 +13,6 @@ public class ColorEntity {
     private String color;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "colorList")
+    @ManyToMany(mappedBy = "colorSet")
     private Set<ElementEntity> elementEntityList;
 }
