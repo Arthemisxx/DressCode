@@ -52,7 +52,13 @@ public class ElementService {
     }
 
     public ElementDTO findById(Long id) {
-            return elementMapper.toDTO(elementRepository.findElementEntityById(id));
+        var result = elementRepository.findElementEntityById(id);
+        if(result == null){
+            return null;
+        }else{
+            return elementMapper.toDTO(result);
+        }
+
     }
 
     public void deleteElement(Long id) {

@@ -6,4 +6,6 @@ import org.staniszewska.dresscode.entity.SetEntity;
 public interface SetRepository extends CrudRepository<SetEntity, Long> {
     SetEntity findSetEntityById(Long id);
 
+    SetEntity findSetEntityByName(String name);
+
 }
