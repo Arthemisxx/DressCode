@@ -52,23 +52,12 @@ public class ElementService {
     }
 
     public ElementDTO findById(Long id) {
-        var result = elementRepository.findElementEntityById(id);
-        if(result == null){
-            return null;
-        }else{
-            return elementMapper.toDTO(result);
-        }
+            return elementMapper.toDTO(elementRepository.findElementEntityById(id));
     }
 
     public void deleteElement(Long id) {
-        ElementEntity e = elementRepository.findElementEntityById(id);
-        if(e == null){
-            logger.info("Element with id {} not found", id);
-        }else{
-            elementRepository.delete(e);
+            elementRepository.delete(elementRepository.findElementEntityById(id));
             logger.info("Element successfully deleted!");
-        }
-
     }
 
     public void updateElement(Long id, ElementDTO elementDTO) {

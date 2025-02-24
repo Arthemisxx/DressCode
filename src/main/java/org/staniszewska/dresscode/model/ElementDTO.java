@@ -1,6 +1,5 @@
 package org.staniszewska.dresscode.model;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ElementDTO {
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String description;

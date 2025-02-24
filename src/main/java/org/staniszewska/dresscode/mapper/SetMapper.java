@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.staniszewska.dresscode.entity.*;
 import org.staniszewska.dresscode.model.*;
+import org.staniszewska.dresscode.repository.ElementRepository;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,6 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SetMapper {
     private final ElementMapper elementMapper;
+    private final ElementRepository elementRepository;
 
     public SetDTO toDTO(SetEntity setEntity) {
         String name = setEntity.getName();
@@ -51,10 +54,17 @@ public class SetMapper {
                 })
                 .collect(Collectors.toSet());
 
+        var existingEntities = setDTO.getElements().stream().filter(elementDTO -> elementDTO.getId() != null)
+                .map(elementDTO -> elementRepository.findById(elementDTO.getId())).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toSet());
+
+
         Set<ElementEntity> elements = setDTO.getElements()
                 .stream()
+                .filter(elementDTO -> elementDTO.getId() == null)
                 .map(elementMapper::toEntity)
                 .collect(Collectors.toSet());
+
+        elements.addAll(existingEntities);
 
         return new SetEntity(name, description, photo, creator, category, seasons, elements);
     }

@@ -1,4 +1,5 @@
 package org.staniszewska.dresscode.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
