@@ -7,17 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import org.staniszewska.dresscode.entity.ElementEntity;
-import org.staniszewska.dresscode.mapper.ElementMapper;
-import org.staniszewska.dresscode.model.ElementCategory;
-import org.staniszewska.dresscode.model.ElementDTO;
-import org.staniszewska.dresscode.model.Season;
-import org.staniszewska.dresscode.repository.ElementRepository;
-import org.staniszewska.dresscode.service.ElementService;
+import org.staniszewska.dresscode.entities.ElementEntity;
+import org.staniszewska.dresscode.models.ElementCategory;
+import org.staniszewska.dresscode.models.dtos.ElementDTO;
+import org.staniszewska.dresscode.models.Season;
+import org.staniszewska.dresscode.repositories.ElementRepository;
+import org.staniszewska.dresscode.services.ElementService;
 
 import java.util.Set;
 

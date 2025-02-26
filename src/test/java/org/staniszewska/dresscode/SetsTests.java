@@ -1,6 +1,5 @@
 package org.staniszewska.dresscode;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -10,9 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.staniszewska.dresscode.model.*;
-import org.staniszewska.dresscode.repository.ElementRepository;
-import org.staniszewska.dresscode.repository.SetRepository;
+import org.staniszewska.dresscode.models.*;
+import org.staniszewska.dresscode.models.dtos.ElementDTO;
+import org.staniszewska.dresscode.models.dtos.SetDTO;
+import org.staniszewska.dresscode.repositories.ElementRepository;
+import org.staniszewska.dresscode.repositories.SetRepository;
 
 import java.util.Set;
 
